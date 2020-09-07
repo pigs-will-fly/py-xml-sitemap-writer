@@ -8,7 +8,10 @@ from xml_sitemap_writer import XMLSitemap
 from . import urls_iterator
 
 
-def test_simple_sitemap():
+def test_simple_single_sitemap():
+    """
+    Tests a single sitemap
+    """
     with TemporaryDirectory(prefix='sitemap_test_') as tmp_directory:
         sitemap = XMLSitemap(path=tmp_directory)
 
@@ -21,18 +24,10 @@ def test_simple_sitemap():
         assert sitemap.sitemaps == ['sitemap-001-pages.xml']
 
 
-def test_add_from_iterable():
-    with TemporaryDirectory(prefix='sitemap_test_') as tmp_directory:
-        sitemap = XMLSitemap(path=tmp_directory)
-        sitemap.add_urls(urls_iterator())
-
-        print(sitemap)
-
-        assert len(sitemap) == 10
-        assert sitemap.sitemaps == ['sitemap-001-pages.xml']
-
-
 def test_sub_sitemaps():
+    """
+    Tests two sub-sitemaps
+    """
     with TemporaryDirectory(prefix='sitemap_test_') as tmp_directory:
         sitemap = XMLSitemap(path=tmp_directory)
 

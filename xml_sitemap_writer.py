@@ -38,6 +38,8 @@ class XMLSitemap:
         self.total_urls_counter += 1
         self.sitemap_urls_counter += 1
 
+        self.logger.debug(f'Adding URL <{url}>')
+
     def add_urls(self, urls: Iterator[str]):
         """
         Add URLs for a provided iterable
