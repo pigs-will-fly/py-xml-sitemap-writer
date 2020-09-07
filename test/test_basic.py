@@ -35,4 +35,7 @@ def test_sub_sitemaps():
         print(sitemap)
 
         assert len(sitemap) == 20
-        assert sitemap.sitemaps == ["sitemap-001-pages.xml.gz", "sitemap-002-users.xml.gz"]
+        assert sitemap.sitemaps == [
+            "sitemap-001-pages.xml.gz",
+            "sitemap-002-users.xml.gz",
+        ]
