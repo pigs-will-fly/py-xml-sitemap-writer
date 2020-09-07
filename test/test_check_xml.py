@@ -62,3 +62,23 @@ def test_simple_single_sitemap_output():
             ), "<sitemap> element is properly emitted"
 
             assert "<!-- 5 urls -->" in content, "URLs counter is properly added"
+
+
+def test_encode_urls():
+    """
+    Tests URLs encoding
+    """
+    with TemporaryDirectory(prefix="sitemap_test_") as tmp_directory:
+        with XMLSitemap(path=tmp_directory, root_url=DEFAULT_HOST) as sitemap:
+            sitemap.add_url(f"{DEFAULT_HOST}/foo.php")
+            sitemap.add_url(f"{DEFAULT_HOST}/foo.php?test=123")
+            sitemap.add_url(f"{DEFAULT_HOST}/foo.php?test&bar=423")
+
+        with gzip.open(f"{tmp_directory}/sitemap-001-pages.xml.gz", "rt") as xml:
+            content = xml.read()
+
+            print("xml", content)
+
+            assert "<loc>http://example.net/foo.php</loc>" in content
+            assert "<loc>http://example.net/foo.php?test=123</loc>" in content
+            assert "<loc>http://example.net/foo.php?test&amp;bar=423</loc>" in content
