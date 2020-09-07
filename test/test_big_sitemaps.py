@@ -16,11 +16,11 @@ def test_a_big_sitemap():
         assert len(sitemap) == 100000
         assert "(100000 URLs)" in repr(sitemap)
         assert sitemap.sitemaps == [
-            "sitemap-001-pages.xml",
-            "sitemap-002-pages.xml",
-            "sitemap-003-pages.xml",
-            "sitemap-004-pages.xml",
-            "sitemap-005-pages.xml",
-            "sitemap-006-pages.xml",
-            "sitemap-007-pages.xml",
+            "sitemap-001-pages.xml.gz",
+            "sitemap-002-pages.xml.gz",
+            "sitemap-003-pages.xml.gz",
+            "sitemap-004-pages.xml.gz",
+            "sitemap-005-pages.xml.gz",
+            "sitemap-006-pages.xml.gz",
+            "sitemap-007-pages.xml.gz",
         ]

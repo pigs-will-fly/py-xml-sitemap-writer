@@ -1,6 +1,7 @@
 """
 Tests a sitemap's XML output
 """
+import gzip
 from tempfile import TemporaryDirectory
 
 from xml_sitemap_writer import XMLSitemap
@@ -15,7 +16,7 @@ def test_simple_single_sitemap_output():
         with XMLSitemap(path=tmp_directory, root_url=DEFAULT_HOST) as sitemap:
             sitemap.add_urls(urls_iterator(count=5, prefix="product"))
 
-        with open(f"{tmp_directory}/sitemap-001-pages.xml", "rt") as xml:
+        with gzip.open(f"{tmp_directory}/sitemap-001-pages.xml.gz", "rt") as xml:
             content = xml.read()
 
             print("xml", content)
@@ -56,7 +57,7 @@ def test_simple_single_sitemap_output():
             ), "Root element is properly emitted"
 
             assert (
-                f"<sitemap><loc>{DEFAULT_HOST}/sitemap-001-pages.xml</loc></sitemap"
+                f"<sitemap><loc>{DEFAULT_HOST}/sitemap-001-pages.xml.gz</loc></sitemap"
                 in content
             ), "<sitemap> element is properly emitted"
 

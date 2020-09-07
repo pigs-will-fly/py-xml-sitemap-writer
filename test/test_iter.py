@@ -14,4 +14,4 @@ def test_add_from_iterable():
         print(sitemap)
 
         assert len(sitemap) == 10
-        assert sitemap.sitemaps == ["sitemap-001-pages.xml"]
+        assert sitemap.sitemaps == ["sitemap-001-pages.xml.gz"]

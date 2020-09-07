@@ -1,10 +1,11 @@
 """
 Provides XMLSitemap class used to generate large XML sitemap from iterators
 """
+import gzip  # https://docs.python.org/3/library/gzip.html
 import logging
+
 from typing import List, Iterator
 from typing.io import IO  # pylint:disable=import-error
-
 from xml.sax.saxutils import escape as escape_xml
 
 
@@ -18,6 +19,8 @@ class XMLSitemap:
     # and must be no larger than 10MB (10,485,760 bytes).
     # @see http://www.sitemaps.org/protocol.html#index
     URLS_PER_FILE = 15000
+
+    GZIP_COMPRESSION_LEVEL = 9
 
     def __init__(self, path: str, root_url: str):
         """
@@ -69,7 +72,7 @@ class XMLSitemap:
     def add_section(self, section_name: str):
         """
         Starting a new section will create a new sub-sitemap with
-        a filename set to "sitemap-<section_name>-<number>.xml"
+        a filename set to "sitemap-<section_name>-<number>.xml.gz"
         """
         self.current_section_name = section_name
         self._add_sitemap()
@@ -134,7 +137,7 @@ class XMLSitemap:
         self._close_sitemap()
 
         self.sitemaps_counter += 1
-        sitemap_name = "sitemap-%03d-%s.xml" % (
+        sitemap_name = "sitemap-%03d-%s.xml.gz" % (
             self.sitemaps_counter,
             self.current_section_name,
         )
@@ -143,7 +146,11 @@ class XMLSitemap:
         self.logger.info(f"New sitemap added: {sitemap_name}")
 
         # start a sitemap XML writer
-        self._sitemap_file = open(f"{self.path}/{sitemap_name}", mode="wt")
+        self._sitemap_file = gzip.open(
+            f"{self.path}/{sitemap_name}",
+            mode="wt",
+            compresslevel=self.GZIP_COMPRESSION_LEVEL,
+        )
         self.logger.info(f"Will write sitemap XML to {self.sitemap_file.name}")
 
         self.write_to_sitemap('<?xml version="1.0" encoding="UTF-8"?>', indent=False)
@@ -177,7 +184,7 @@ class XMLSitemap:
                 [
                     '<?xml version="1.0" encoding="UTF-8"?>\n',
                     '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n',
-                    f"<!-- {len(self)} urls -->\n",
+                    f"\t<!-- {len(self)} urls -->\n",
                 ]
             )
 

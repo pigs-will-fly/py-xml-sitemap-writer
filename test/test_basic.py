@@ -16,7 +16,7 @@ def test_simple_single_sitemap():
 
         assert len(sitemap) == 10
         assert "(10 URLs)" in repr(sitemap)
-        assert sitemap.sitemaps == ["sitemap-001-pages.xml"]
+        assert sitemap.sitemaps == ["sitemap-001-pages.xml.gz"]
 
 
 def test_sub_sitemaps():
@@ -35,4 +35,4 @@ def test_sub_sitemaps():
         print(sitemap)
 
         assert len(sitemap) == 20
-        assert sitemap.sitemaps == ["sitemap-001-pages.xml", "sitemap-002-users.xml"]
+        assert sitemap.sitemaps == ["sitemap-001-pages.xml.gz", "sitemap-002-users.xml.gz"]
