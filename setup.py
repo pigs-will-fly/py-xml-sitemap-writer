@@ -41,7 +41,4 @@ setup(
             "pytest==6.0.1",
         ]
     },
-    install_requires=[
-        "lxml==4.5.2",
-    ],
 )

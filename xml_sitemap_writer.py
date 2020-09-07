@@ -3,8 +3,12 @@ Provides XMLSitemap class used to generate large XML sitemap from iterators
 """
 import logging
 from typing import List, Iterator
+from typing.io import IO  # pylint:disable=import-error
+
+# from xml.sax.saxutils import escape as escape_xml
 
 
+# pylint:disable=too-many-instance-attributes
 class XMLSitemap:
     """
     Generate large XML sitemaps with a sitemap index and sub-sitemap XML files
@@ -19,7 +23,7 @@ class XMLSitemap:
         """
         Set up XMLSitemap to write to a given path
         """
-        self.path = path
+        self.path = path.rstrip("/")
         self.logger = logging.getLogger(self.__class__.__name__)
 
         self._sitemaps = []
@@ -28,6 +32,9 @@ class XMLSitemap:
 
         self.total_urls_counter = 0
         self.sitemap_urls_counter = 0
+
+        # file handler for a current sitemap
+        self._sitemap_file = None
 
         self.add_section("pages")
 
@@ -62,6 +69,20 @@ class XMLSitemap:
         """
         return self._sitemaps
 
+    @property
+    def sitemap_file(self) -> IO:
+        """
+        Returns file handler for a current file
+        """
+        assert self._sitemap_file is not None, "add_section() needs to called before"
+        return self._sitemap_file
+
+    def write_to_sitemap(self, buf: str):
+        """
+        Writes given string to a sitemap file
+        """
+        self.sitemap_file.writelines([buf])
+
     def __repr__(self):
         """
         A string representation
@@ -74,6 +95,18 @@ class XMLSitemap:
         """
         return self.total_urls_counter
 
+    def __enter__(self):
+        """
+        Called when sitemap context starts
+        """
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        """
+        Called when sitemap context completes
+        """
+        self._close_sitemap()
+
     def _add_sitemap(self):
         """
         Called internally to add a new sitemap:
@@ -81,6 +114,9 @@ class XMLSitemap:
         * when start_section() is called
         * when per-sitemap URLs counter reaches the limit
         """
+        # close a previous sitemap, if any
+        self._close_sitemap()
+
         self.sitemaps_counter += 1
         sitemap_name = "sitemap-%03d-%s.xml" % (
             self.sitemaps_counter,
@@ -89,3 +125,20 @@ class XMLSitemap:
 
         self._sitemaps.append(sitemap_name)
         self.logger.info(f"New sitemap added: {sitemap_name}")
+
+        # start a sitemap XML writer
+        self._sitemap_file = open(f"{self.path}/{sitemap_name}", mode="wt")
+        self.logger.info(f"Will write sitemap XML to {self.sitemap_file.name}")
+
+        self.write_to_sitemap('<?xml version="1.0" encoding="UTF-8"?>')
+        self.write_to_sitemap(
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+        )
+
+    def _close_sitemap(self):
+        """
+        Close a sitemap XML
+        """
+        if self._sitemap_file:
+            self.logger.info(f"Closing {self.sitemap_file.name}")
+            self.sitemap_file.close()
