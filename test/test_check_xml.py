@@ -29,6 +29,14 @@ def test_simple_single_sitemap_output():
                 in content
             ), "Root element is properly emitted"
 
+            assert "</urlset>" in content, "Root element is properly closed"
+
             assert (
-                f"<url><loc>{DEFAULT_HOST}/product_1.html</loc></url>" in content
-            ), "URL is properly added to the sitemap"
+                "<!-- 5 urls in the sitemap -->" in content
+            ), "URLs counter is properly added"
+
+            for idx in range(1, len(sitemap) + 1):
+                assert (
+                    f"<url><loc>{DEFAULT_HOST}/product_{idx}.html</loc></url>"
+                    in content
+                ), "URL is properly added to the sitemap"

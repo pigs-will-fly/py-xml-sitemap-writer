@@ -45,10 +45,16 @@ class XMLSitemap:
         self.total_urls_counter += 1
         self.sitemap_urls_counter += 1
 
+        # check per sitemap limits
+        if self.sitemap_urls_counter > self.URLS_PER_FILE:
+            self.logger.info(
+                f"URLs per sitemap counter reached the limit of {self.URLS_PER_FILE}"
+            )
+            self._add_sitemap()
+            self.sitemap_urls_counter = 1
+
         self.logger.debug(f"Adding URL <{url}>")
         self.write_to_sitemap(f"<url><loc>{escape_xml(url)}</loc></url>")
-
-        # TO DO: check per sitemap limits
 
     def add_urls(self, urls: Iterator[str]):
         """
@@ -80,11 +86,14 @@ class XMLSitemap:
         assert self._sitemap_file is not None, "add_section() needs to called before"
         return self._sitemap_file
 
-    def write_to_sitemap(self, buf: str):
+    def write_to_sitemap(self, buf: str, indent: bool = True):
         """
         Writes given string to a sitemap file
         """
-        self.sitemap_file.writelines([buf])
+        if indent:
+            buf = "\t" + buf
+
+        self.sitemap_file.write(buf + "\n")
 
     def __repr__(self):
         """
@@ -133,9 +142,9 @@ class XMLSitemap:
         self._sitemap_file = open(f"{self.path}/{sitemap_name}", mode="wt")
         self.logger.info(f"Will write sitemap XML to {self.sitemap_file.name}")
 
-        self.write_to_sitemap('<?xml version="1.0" encoding="UTF-8"?>')
+        self.write_to_sitemap('<?xml version="1.0" encoding="UTF-8"?>', indent=False)
         self.write_to_sitemap(
-            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', indent=False
         )
 
     def _close_sitemap(self):
@@ -144,4 +153,10 @@ class XMLSitemap:
         """
         if self._sitemap_file:
             self.logger.info(f"Closing {self.sitemap_file.name}")
+
+            self.write_to_sitemap("</urlset>", indent=False)
+            self.write_to_sitemap(
+                f"<!-- {self.sitemap_urls_counter} urls in the sitemap -->",
+                indent=False,
+            )
             self.sitemap_file.close()
