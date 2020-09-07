@@ -118,6 +118,7 @@ class XMLSitemap:
         Called when sitemap context completes
         """
         self._close_sitemap()
+        self._write_index()
 
     def _add_sitemap(self):
         """
@@ -160,3 +161,20 @@ class XMLSitemap:
                 indent=False,
             )
             self.sitemap_file.close()
+
+    def _write_index(self):
+        """
+        Write a sitemap index XML file
+        """
+        with open(f"{self.path}/sitemap.xml", mode="wt") as index:
+            self.logger.info(f"Will write sitemaps index XML to {index.name}")
+
+            index.writelines(
+                [
+                    '<?xml version="1.0" encoding="UTF-8"?>',
+                    '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+                    f"<!-- {len(self)} urls -->",
+                ]
+            )
+
+            index.write("</sitemapindex>")

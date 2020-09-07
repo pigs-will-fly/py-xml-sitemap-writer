@@ -40,3 +40,19 @@ def test_simple_single_sitemap_output():
                     f"<url><loc>{DEFAULT_HOST}/product_{idx}.html</loc></url>"
                     in content
                 ), "URL is properly added to the sitemap"
+
+        with open(f"{tmp_directory}/sitemap.xml", "rt") as index_xml:
+            content = index_xml.read()
+
+            print("index_xml", content)
+
+            assert (
+                '<?xml version="1.0" encoding="UTF-8"?>' in content
+            ), "XML header is properly emitted"
+
+            assert (
+                '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+                in content
+            ), "Root element is properly emitted"
+
+            assert "<!-- 5 urls -->" in content, "URLs counter is properly added"
