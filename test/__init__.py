@@ -9,9 +9,11 @@ from typing import Iterator, ContextManager
 
 from xml_sitemap_writer import XMLSitemap
 
+DEFAULT_HOST = "http://example.net"
+
 
 def urls_iterator(
-    count: int = 10, prefix: str = "page_", host: str = "http://example.net"
+    count: int = 10, prefix: str = "page_", host: str = DEFAULT_HOST
 ) -> Iterator[str]:
     """
     Returns URLs iterator

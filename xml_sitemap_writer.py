@@ -5,7 +5,7 @@ import logging
 from typing import List, Iterator
 from typing.io import IO  # pylint:disable=import-error
 
-# from xml.sax.saxutils import escape as escape_xml
+from xml.sax.saxutils import escape as escape_xml
 
 
 # pylint:disable=too-many-instance-attributes
@@ -46,6 +46,9 @@ class XMLSitemap:
         self.sitemap_urls_counter += 1
 
         self.logger.debug(f"Adding URL <{url}>")
+        self.write_to_sitemap(f"<url><loc>{escape_xml(url)}</loc></url>")
+
+        # TO DO: check per sitemap limits
 
     def add_urls(self, urls: Iterator[str]):
         """
