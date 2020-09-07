@@ -1,26 +1,21 @@
 """
 Tests a basic sitemap's API
 """
-# https://docs.python.org/3/library/tempfile.html#tempfile.TemporaryDirectory
-from tempfile import TemporaryDirectory
-
-from xml_sitemap_writer import XMLSitemap
-from . import urls_iterator
+from . import urls_iterator, test_sitemap
 
 
 def test_simple_single_sitemap():
     """
     Tests a single sitemap
     """
-    with TemporaryDirectory(prefix="sitemap_test_") as tmp_directory:
-        sitemap = XMLSitemap(path=tmp_directory)
-
+    with test_sitemap() as sitemap:
         for url in urls_iterator():
             sitemap.add_url(url)
 
         print(sitemap)
 
         assert len(sitemap) == 10
+        assert "(10 URLs)" in repr(sitemap)
         assert sitemap.sitemaps == ["sitemap-001-pages.xml"]
 
 
@@ -28,9 +23,7 @@ def test_sub_sitemaps():
     """
     Tests two sub-sitemaps
     """
-    with TemporaryDirectory(prefix="sitemap_test_") as tmp_directory:
-        sitemap = XMLSitemap(path=tmp_directory)
-
+    with test_sitemap() as sitemap:
         for url in urls_iterator():
             sitemap.add_url(url)
 

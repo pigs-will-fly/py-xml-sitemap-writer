@@ -1,19 +1,14 @@
 """
 Tests a iterator sitemap's API
 """
-# https://docs.python.org/3/library/tempfile.html#tempfile.TemporaryDirectory
-from tempfile import TemporaryDirectory
-
-from xml_sitemap_writer import XMLSitemap
-from . import urls_iterator
+from . import urls_iterator, test_sitemap
 
 
 def test_add_from_iterable():
     """
     Tests adding URL via iterable
     """
-    with TemporaryDirectory(prefix="sitemap_test_") as tmp_directory:
-        sitemap = XMLSitemap(path=tmp_directory)
+    with test_sitemap() as sitemap:
         sitemap.add_urls(urls_iterator())
 
         print(sitemap)
