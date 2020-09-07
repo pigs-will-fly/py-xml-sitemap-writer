@@ -24,12 +24,12 @@ class XMLSitemap:
 
         self._sitemaps = []
         self.sitemaps_counter = 0
-        self.current_section_name = ''
+        self.current_section_name = ""
 
         self.total_urls_counter = 0
         self.sitemap_urls_counter = 0
 
-        self.add_section('pages')
+        self.add_section("pages")
 
     def add_url(self, url: str):
         """
@@ -38,7 +38,7 @@ class XMLSitemap:
         self.total_urls_counter += 1
         self.sitemap_urls_counter += 1
 
-        self.logger.debug(f'Adding URL <{url}>')
+        self.logger.debug(f"Adding URL <{url}>")
 
     def add_urls(self, urls: Iterator[str]):
         """
@@ -66,7 +66,7 @@ class XMLSitemap:
         """
         A string representation
         """
-        return f'<{self.__class__.__name__} at {self.path} ({len(self)} URLs)>'
+        return f"<{self.__class__.__name__} at {self.path} ({len(self)} URLs)>"
 
     def __len__(self):
         """
@@ -82,7 +82,10 @@ class XMLSitemap:
         * when per-sitemap URLs counter reaches the limit
         """
         self.sitemaps_counter += 1
-        sitemap_name = 'sitemap-%03d-%s.xml' % (self.sitemaps_counter, self.current_section_name)
+        sitemap_name = "sitemap-%03d-%s.xml" % (
+            self.sitemaps_counter,
+            self.current_section_name,
+        )
 
         self._sitemaps.append(sitemap_name)
-        self.logger.info(f'New sitemap added: {sitemap_name}')
+        self.logger.info(f"New sitemap added: {sitemap_name}")
