@@ -12,7 +12,7 @@ def test_simple_single_sitemap_output():
     Tests a single sitemap XML output
     """
     with TemporaryDirectory(prefix="sitemap_test_") as tmp_directory:
-        with XMLSitemap(path=tmp_directory) as sitemap:
+        with XMLSitemap(path=tmp_directory, root_url=DEFAULT_HOST) as sitemap:
             sitemap.add_urls(urls_iterator(count=5, prefix="product"))
 
         with open(f"{tmp_directory}/sitemap-001-pages.xml", "rt") as xml:
@@ -54,5 +54,10 @@ def test_simple_single_sitemap_output():
                 '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
                 in content
             ), "Root element is properly emitted"
+
+            assert (
+                f"<sitemap><loc>{DEFAULT_HOST}/sitemap-001-pages.xml</loc></sitemap"
+                in content
+            ), "<sitemap> element is properly emitted"
 
             assert "<!-- 5 urls -->" in content, "URLs counter is properly added"

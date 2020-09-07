@@ -19,11 +19,14 @@ class XMLSitemap:
     # @see http://www.sitemaps.org/protocol.html#index
     URLS_PER_FILE = 15000
 
-    def __init__(self, path: str):
+    def __init__(self, path: str, root_url: str):
         """
-        Set up XMLSitemap to write to a given path
+        Set up XMLSitemap to write to a given path and using a specified root_url.
+
+        root_url will be used when generating sitemaps index file.
         """
         self.path = path.rstrip("/")
+        self.root_url = root_url.rstrip("/")
         self.logger = logging.getLogger(self.__class__.__name__)
 
         self._sitemaps = []
@@ -161,6 +164,7 @@ class XMLSitemap:
                 indent=False,
             )
             self.sitemap_file.close()
+            self._sitemap_file = None
 
     def _write_index(self):
         """
@@ -171,10 +175,15 @@ class XMLSitemap:
 
             index.writelines(
                 [
-                    '<?xml version="1.0" encoding="UTF-8"?>',
-                    '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-                    f"<!-- {len(self)} urls -->",
+                    '<?xml version="1.0" encoding="UTF-8"?>\n',
+                    '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n',
+                    f"<!-- {len(self)} urls -->\n",
                 ]
             )
+
+            for sitemap in self.sitemaps:
+                index.write(
+                    f"\t<sitemap><loc>{self.root_url}/{escape_xml(sitemap)}</loc></sitemap>\n"
+                )
 
             index.write("</sitemapindex>")
