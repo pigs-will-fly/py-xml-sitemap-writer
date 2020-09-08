@@ -8,6 +8,8 @@ from typing import List, Iterator
 from typing.io import IO  # pylint:disable=import-error
 from xml.sax.saxutils import escape as escape_xml
 
+POWERED_BY_URL = 'https://github.com/pigs-will-fly/py-xml-sitemap-writer'
+
 
 # pylint:disable=too-many-instance-attributes
 class XMLSitemap:
@@ -191,7 +193,7 @@ class XMLSitemap:
                 [
                     '<?xml version="1.0" encoding="UTF-8"?>\n',
                     '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n',
-                    f"\t<!-- Powered by https://github.com/pigs-will-fly/py-xml-sitemap-writer -->\n",
+                    f"\t<!-- Powered by {POWERED_BY_URL} -->\n",
                     f"\t<!-- {len(self)} urls -->\n",
                 ]
             )
