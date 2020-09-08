@@ -48,6 +48,11 @@ class XMLSitemap:
         """
         Add a given URL to the sitemap
         """
+        # lazily create a new sub-sitemap file
+        # see add_section() method
+        if self.sitemap_urls_counter == 0:
+            self._add_sitemap()
+
         self.total_urls_counter += 1
         self.sitemap_urls_counter += 1
 
@@ -71,11 +76,13 @@ class XMLSitemap:
 
     def add_section(self, section_name: str):
         """
-        Starting a new section will create a new sub-sitemap with
+        Starting a new section will lazily create a new sub-sitemap with
         a filename set to "sitemap-<section_name>-<number>.xml.gz"
         """
         self.current_section_name = section_name
-        self._add_sitemap()
+        self.sitemap_urls_counter = 0
+
+        # the sub-sitemap will be created after calling add_url() for the first time
 
     @property
     def sitemaps(self) -> List[str]:
@@ -130,7 +137,7 @@ class XMLSitemap:
         """
         Called internally to add a new sitemap:
 
-        * when start_section() is called
+        * when the add_url() after start_section() is called for the first time
         * when per-sitemap URLs counter reaches the limit
         """
         # close a previous sitemap, if any
@@ -184,6 +191,7 @@ class XMLSitemap:
                 [
                     '<?xml version="1.0" encoding="UTF-8"?>\n',
                     '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n',
+                    f"\t<!-- Powered by https://github.com/pigs-will-fly/py-xml-sitemap-writer -->\n",
                     f"\t<!-- {len(self)} urls -->\n",
                 ]
             )

@@ -9,6 +9,8 @@ def test_simple_single_sitemap():
     Tests a single sitemap
     """
     with test_sitemap() as sitemap:
+        sitemap.add_section("articles")
+
         for url in urls_iterator():
             sitemap.add_url(url)
 
@@ -16,7 +18,7 @@ def test_simple_single_sitemap():
 
         assert len(sitemap) == 10
         assert "(10 URLs)" in repr(sitemap)
-        assert sitemap.sitemaps == ["sitemap-001-pages.xml.gz"]
+        assert sitemap.sitemaps == ["sitemap-001-articles.xml.gz"]
 
 
 def test_sub_sitemaps():
