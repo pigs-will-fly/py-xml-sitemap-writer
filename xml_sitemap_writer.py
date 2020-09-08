@@ -8,7 +8,7 @@ from typing import List, Iterator
 from typing.io import IO  # pylint:disable=import-error
 from xml.sax.saxutils import escape as escape_xml
 
-POWERED_BY_URL = 'https://github.com/pigs-will-fly/py-xml-sitemap-writer'
+POWERED_BY_URL = "https://github.com/pigs-will-fly/py-xml-sitemap-writer"
 
 
 # pylint:disable=too-many-instance-attributes
