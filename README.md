@@ -9,8 +9,8 @@ pip install xml-sitemap-writer
 
 ## Usage
 
-This package is meant to **generate sitemaps with hundred of thousands URLs** in **memory-efficient way** by
-making using of **iterators to populate sitemap** with URLs.
+This package is meant to **generate sitemaps with hundred of thousands of URLs** in **memory-efficient way** by
+making use of **iterators to populate sitemap** with URLs.
 
 ```python
 from typing import Iterator
