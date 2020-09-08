@@ -23,7 +23,7 @@ def get_products_for_sitemap() -> Iterator[str]:
     for idx in range(1, 1000001):
         yield f"https://your.site.io/product/{idx}.html"
 
-with XMLSitemap(path='/your/web/root', root_url='http:s//your.site.io') as sitemap:
+with XMLSitemap(path='/your/web/root', root_url='https://your.site.io') as sitemap:
     sitemap.add_section('products')
     sitemap.add_urls(get_products_for_sitemap())
 ```
@@ -52,4 +52,10 @@ And gzipped sub-sitemaps with up to 15.000 URLs each:
     ...
 </urlset>
 <!-- 15000 urls in the sitemap -->
+```
+
+For easier discovery of your sitemap add its URL to `/robots.txt` file:
+
+```
+Sitemap: https://your.site.io/sitemap.xml
 ```
