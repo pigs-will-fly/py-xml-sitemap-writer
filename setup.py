@@ -16,7 +16,7 @@ setup(
     author="Maciej Brencz",
     author_email="maciej.brencz@gmail.com",
     license="MIT",
-    description="Python3 package for writing large XML sitemaps",
+    description="Python3 package for writing large XML sitemaps with no external dependencies",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/pigs-will-fly/py-xml-sitemap-writer",
