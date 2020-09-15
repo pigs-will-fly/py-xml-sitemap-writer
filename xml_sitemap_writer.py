@@ -66,6 +66,8 @@ class XMLSitemap:
             self._add_sitemap()
             self.sitemap_urls_counter = 1
 
+        url = f'{self.root_url}/{url.lstrip("/")}'
+
         self.logger.debug(f"Adding URL <{url}>")
         self.write_to_sitemap(f"<url><loc>{escape_xml(url)}</loc></url>")
 

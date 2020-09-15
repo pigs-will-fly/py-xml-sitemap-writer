@@ -15,14 +15,12 @@ logging.basicConfig(level=logging.DEBUG)
 DEFAULT_HOST = "http://example.net"
 
 
-def urls_iterator(
-    count: int = 10, prefix: str = "page_", host: str = DEFAULT_HOST
-) -> Iterator[str]:
+def urls_iterator(count: int = 10, prefix: str = "page_") -> Iterator[str]:
     """
     Returns URLs iterator
     """
     for idx in range(1, count + 1):
-        yield f"{host}/{prefix}_{idx}.html"
+        yield f"/{prefix}_{idx}.html"
 
 
 @contextmanager
