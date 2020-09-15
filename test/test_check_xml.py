@@ -70,9 +70,9 @@ def test_encode_urls():
     """
     with TemporaryDirectory(prefix="sitemap_test_") as tmp_directory:
         with XMLSitemap(path=tmp_directory, root_url=DEFAULT_HOST) as sitemap:
-            sitemap.add_url(f"{DEFAULT_HOST}/foo.php")
-            sitemap.add_url(f"{DEFAULT_HOST}/foo.php?test=123")
-            sitemap.add_url(f"{DEFAULT_HOST}/foo.php?test&bar=423")
+            sitemap.add_url("/foo.php")
+            sitemap.add_url("/foo.php?test=123")
+            sitemap.add_url("/foo.php?test&bar=423")
 
         with gzip.open(f"{tmp_directory}/sitemap-001-pages.xml.gz", "rt") as xml:
             content = xml.read()
