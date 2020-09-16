@@ -21,7 +21,7 @@ def get_products_for_sitemap() -> Iterator[str]:
     Replace the logic below with a query from your database.
     """
     for idx in range(1, 1000001):
-        yield f"/product/{idx}.html"  # URLs should be absolute without a domain
+        yield f"/product/{idx}.html"  # URLs should be relative to what you provide as "root_url" below
 
 with XMLSitemap(path='/your/web/root', root_url='https://your.site.io') as sitemap:
     sitemap.add_section('products')
