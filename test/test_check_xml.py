@@ -82,3 +82,33 @@ def test_encode_urls():
             assert "<loc>http://example.net/foo.php</loc>" in content
             assert "<loc>http://example.net/foo.php?test=123</loc>" in content
             assert "<loc>http://example.net/foo.php?test&amp;bar=423</loc>" in content
+
+
+def test_multi_sitemaps_urls_counter():
+    """
+    Tests multiple sitemaps and their URLs counter
+    """
+    with TemporaryDirectory(prefix="sitemap_test_") as tmp_directory:
+        with XMLSitemap(path=tmp_directory, root_url=DEFAULT_HOST) as sitemap:
+            sitemap.add_url("/foo.php")
+
+            sitemap.add_section("phones")
+            sitemap.add_url("/iphone")
+            sitemap.add_url("/nokia")
+            sitemap.add_url("/samsung")
+
+        with gzip.open(f"{tmp_directory}/sitemap-001-pages.xml.gz", "rt") as xml:
+            content = xml.read()
+            print("xml", content)
+
+            assert (
+                "<!-- 1 urls in the sitemap -->" in content
+            ), "There should be one URL in the sitemap"
+
+        with gzip.open(f"{tmp_directory}/sitemap-002-phones.xml.gz", "rt") as xml:
+            content = xml.read()
+            print("xml", content)
+
+            assert (
+                "<!-- 3 urls in the sitemap -->" in content
+            ), "There should be three URLs in the sitemap"
