@@ -83,6 +83,8 @@ class XMLSitemap:
         Starting a new section will lazily create a new sub-sitemap with
         a filename set to "sitemap-<section_name>-<number>.xml.gz"
         """
+        self._close_sitemap()
+
         self.current_section_name = section_name
         self.sitemap_urls_counter = 0
 
