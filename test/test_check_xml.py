@@ -101,10 +101,12 @@ def test_multi_sitemaps_urls_counter():
             content = xml.read()
             print("xml", content)
 
-            assert '<!-- 1 urls in the sitemap -->' in content, 'There should be one URL in the sitemap'
+            assert '<!-- 1 urls in the sitemap -->' in content, \
+                'There should be one URL in the sitemap'
 
         with gzip.open(f"{tmp_directory}/sitemap-002-phones.xml.gz", "rt") as xml:
             content = xml.read()
             print("xml", content)
 
-            assert '<!-- 3 urls in the sitemap -->' in content, 'There should be three URLs in the sitemap'
+            assert '<!-- 3 urls in the sitemap -->' in content,\
+                'There should be three URLs in the sitemap'
