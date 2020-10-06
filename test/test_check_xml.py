@@ -92,21 +92,23 @@ def test_multi_sitemaps_urls_counter():
         with XMLSitemap(path=tmp_directory, root_url=DEFAULT_HOST) as sitemap:
             sitemap.add_url("/foo.php")
 
-            sitemap.add_section('phones')
-            sitemap.add_url('/iphone')
-            sitemap.add_url('/nokia')
-            sitemap.add_url('/samsung')
+            sitemap.add_section("phones")
+            sitemap.add_url("/iphone")
+            sitemap.add_url("/nokia")
+            sitemap.add_url("/samsung")
 
         with gzip.open(f"{tmp_directory}/sitemap-001-pages.xml.gz", "rt") as xml:
             content = xml.read()
             print("xml", content)
 
-            assert '<!-- 1 urls in the sitemap -->' in content, \
-                'There should be one URL in the sitemap'
+            assert (
+                "<!-- 1 urls in the sitemap -->" in content
+            ), "There should be one URL in the sitemap"
 
         with gzip.open(f"{tmp_directory}/sitemap-002-phones.xml.gz", "rt") as xml:
             content = xml.read()
             print("xml", content)
 
-            assert '<!-- 3 urls in the sitemap -->' in content,\
-                'There should be three URLs in the sitemap'
+            assert (
+                "<!-- 3 urls in the sitemap -->" in content
+            ), "There should be three URLs in the sitemap"
