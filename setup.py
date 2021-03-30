@@ -37,7 +37,7 @@ setup(
         "dev": [
             "black==20.8b1",
             "coverage==5.5",
-            "pylint==2.7.2",
+            "pylint==2.7.4",
             "pytest==6.2.2",
         ]
     },
