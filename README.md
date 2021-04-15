@@ -1,7 +1,7 @@
 # py-xml-sitemap-writer
 [![PyPI](https://img.shields.io/pypi/v/xml-sitemap-writer.svg)](https://pypi.python.org/pypi/xml-sitemap-writer)
 
-Python3 package for writing large XML sitemaps with no external dependencies.
+Python3 package for writing large [XML sitemaps](https://www.sitemaps.org/index.html) with no external dependencies.
 
 ```
 pip install xml-sitemap-writer
