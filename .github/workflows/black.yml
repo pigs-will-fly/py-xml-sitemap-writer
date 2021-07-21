@@ -17,12 +17,14 @@ jobs:
       with:
         python-version: 3.9
 
-    - name: Check code formatting
+    - name: Install black
       run: |
         # black==21.7b0
         export BLACK_VERSION=$(grep black setup.py | egrep -o '==[0-9a-z.]+' | sed 's/=//g')
 
         set -x
         pip install black==${BLACK_VERSION}
-      
+
+    - name: Check code formatting
+      run: |
         black --check .
