@@ -7,22 +7,42 @@ on:
   push:
     branches: [ master ]
   pull_request:
-    branches: [ master ]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        # https://github.com/actions/python-versions/blob/main/versions-manifest.json
+        python-version:
+        - "3.6"
+        - "3.7"
+        - "3.8"
+        - "3.9"
+
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python 3.8
+
+    - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2.2.2
       with:
-        python-version: 3.8
+        python-version: ${{ matrix.python-version }}
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        pip install wheel
         pip install .[dev]
+
     - name: Lint and test it
       run: make check
+
+    # https://coveralls-python.readthedocs.io/en/latest/usage/index.html
+    # upload coverage report for just one of Python version matrix runs
+    - name: Upload coverage report to Coveralls
+      if: matrix.python-version == '3.9'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: coveralls --service=github

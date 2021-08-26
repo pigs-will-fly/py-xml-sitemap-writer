@@ -36,9 +36,10 @@ setup(
     extras_require={
         "dev": [
             "black==21.7b0",
-            "coverage==5.5",
+            "coveralls==3.2.0",
             "pylint==2.10.2",
             "pytest==6.2.4",
+            "pytest-cov==2.12.1",
         ]
     },
 )
