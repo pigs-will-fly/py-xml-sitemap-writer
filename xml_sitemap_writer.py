@@ -190,7 +190,7 @@ class XMLSitemap:
         """
         Write a sitemap index XML file
         """
-        with open(f"{self.path}/sitemap.xml", mode="wt", encoding='utf-8') as index:
+        with open(f"{self.path}/sitemap.xml", mode="wt", encoding="utf-8") as index:
             self.logger.info(f"Will write sitemaps index XML to {index.name}")
 
             index.writelines(
