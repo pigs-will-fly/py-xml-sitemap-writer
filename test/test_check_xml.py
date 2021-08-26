@@ -42,7 +42,7 @@ def test_simple_single_sitemap_output():
                     in content
                 ), "URL is properly added to the sitemap"
 
-        with open(f"{tmp_directory}/sitemap.xml", "rt") as index_xml:
+        with open(f"{tmp_directory}/sitemap.xml", "rt", encoding='utf-8') as index_xml:
             content = index_xml.read()
 
             print("index_xml", content)

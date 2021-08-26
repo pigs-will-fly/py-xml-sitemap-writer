@@ -6,7 +6,7 @@ from setuptools import setup
 VERSION = "0.4.0"
 
 # @see https://packaging.python.org/tutorials/packaging-projects/#creating-setup-py
-with open("README.md", "r") as fh:
+with open("README.md", "r", encoding='utf-8') as fh:
     long_description = fh.read()
 
 # @see https://github.com/pypa/sampleproject/blob/master/setup.py
