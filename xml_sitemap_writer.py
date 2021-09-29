@@ -150,7 +150,9 @@ class XMLSitemap:
         self._close_sitemap()
 
         self.sitemaps_counter += 1
-        sitemap_name = f"sitemap-{self.sitemaps_counter:03}-{self.current_section_name}.xml.gz"
+        sitemap_name = (
+            f"sitemap-{self.sitemaps_counter:03}-{self.current_section_name}.xml.gz"
+        )
 
         self._sitemaps.append(sitemap_name)
         self.logger.info(f"New sitemap added: {sitemap_name}")
