@@ -150,9 +150,8 @@ class XMLSitemap:
         self._close_sitemap()
 
         self.sitemaps_counter += 1
-        sitemap_name = "sitemap-%03d-%s.xml.gz" % (
-            self.sitemaps_counter,
-            self.current_section_name,
+        sitemap_name = (
+            f"sitemap-{self.sitemaps_counter:03}-{self.current_section_name}.xml.gz"
         )
 
         self._sitemaps.append(sitemap_name)
