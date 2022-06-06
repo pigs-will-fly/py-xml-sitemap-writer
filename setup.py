@@ -32,6 +32,7 @@ setup(
         # Specify the Python versions you support here.
         "Programming Language :: Python :: 3",
     ],
+    python_requires=">=3.7",
     py_modules=["xml_sitemap_writer"],
     extras_require={
         "dev": [
