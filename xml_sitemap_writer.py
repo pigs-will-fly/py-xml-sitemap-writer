@@ -4,8 +4,7 @@ Provides XMLSitemap class used to generate large XML sitemap from iterators
 import gzip  # https://docs.python.org/3/library/gzip.html
 import logging
 
-from typing import List, Iterator
-from typing.io import IO  # pylint:disable=import-error
+from typing import List, Iterator, IO
 from xml.sax.saxutils import escape as escape_xml
 
 POWERED_BY_URL = "https://github.com/pigs-will-fly/py-xml-sitemap-writer"
