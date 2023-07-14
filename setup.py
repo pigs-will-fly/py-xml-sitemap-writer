@@ -3,7 +3,7 @@ Package definition
 """
 from setuptools import setup
 
-VERSION = "0.5.0"
+VERSION = "0.5.1"
 
 # @see https://packaging.python.org/tutorials/packaging-projects/#creating-setup-py
 with open("README.md", "r", encoding="utf-8") as fh:
