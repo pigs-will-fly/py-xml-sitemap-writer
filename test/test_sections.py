@@ -1,6 +1,7 @@
 """
 Tests sitemap's custom sections
 """
+
 from . import urls_iterator, test_sitemap
 
 

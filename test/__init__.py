@@ -1,6 +1,7 @@
 """
 Generic helper functions
 """
+
 import logging
 from contextlib import contextmanager
 

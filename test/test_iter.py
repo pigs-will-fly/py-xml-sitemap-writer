@@ -1,6 +1,7 @@
 """
 Tests a iterator sitemap's API
 """
+
 from . import urls_iterator, test_sitemap
 
 
