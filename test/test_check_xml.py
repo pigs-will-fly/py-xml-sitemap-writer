@@ -1,6 +1,7 @@
 """
 Tests a sitemap's XML output
 """
+
 import gzip
 from tempfile import TemporaryDirectory
 

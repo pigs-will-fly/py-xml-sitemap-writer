@@ -1,6 +1,7 @@
 """
 Package definition
 """
+
 from setuptools import setup
 
 VERSION = "0.5.1"
