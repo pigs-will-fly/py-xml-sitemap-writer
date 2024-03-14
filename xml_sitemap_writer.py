@@ -1,6 +1,7 @@
 """
 Provides XMLSitemap class used to generate large XML sitemap from iterators
 """
+
 import gzip  # https://docs.python.org/3/library/gzip.html
 import logging
 
