@@ -37,7 +37,7 @@ setup(
     py_modules=["xml_sitemap_writer"],
     extras_require={
         "dev": [
-            "black==24.2.0",
+            "black==24.3.0",
             "coveralls==3.3.1",
             "pylint==3.1.0",
             "pytest==8.1.1",
