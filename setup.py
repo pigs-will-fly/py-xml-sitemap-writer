@@ -40,7 +40,7 @@ setup(
             "black==24.4.2",
             "coveralls==4.0.1",
             "pylint==3.2.6",
-            "pytest==8.3.1",
+            "pytest==8.3.2",
             "pytest-cov==5.0.0",
         ]
     },
