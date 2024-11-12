@@ -33,14 +33,14 @@ setup(
         # Specify the Python versions you support here.
         "Programming Language :: Python :: 3",
     ],
-    python_requires=">=3.8",
+    python_requires=">=3.9",
     py_modules=["xml_sitemap_writer"],
     extras_require={
         "dev": [
             "black==24.8.0",
             "coveralls==4.0.1",
-            "pylint==3.2.6",
-            "pytest==8.3.2",
+            "pylint==3.2.7",
+            "pytest==8.3.3",
             "pytest-cov==5.0.0",
         ]
     },
