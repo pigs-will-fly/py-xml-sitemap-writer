@@ -77,7 +77,13 @@ class XMLSitemap:
         self.add_section("pages")
 
 
-    def add_url(self, url: str, lastmod: Optional[str] = None, priority: Optional[str] = None, changefreq: Optional[str] = None):
+def add_url(
+        self,
+        url: str,
+        lastmod: Optional[str] = None,
+        priority: Optional[str] = None,
+        changefreq: Optional[str] = None,
+    ):
         if self.sitemap_urls_counter == 0:
             self._add_sitemap()
 
