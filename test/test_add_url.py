@@ -50,3 +50,21 @@ def test_add_basic_url():
         sitemap.recent_write_to_sitemap_buf
         == f"<url><loc>{DEFAULT_HOST}/page_1.html</loc></url>"
     )
+
+
+def test_add_url_with_props():
+    """
+    Asserts that the call creates a proper <url> tag with all optional subtags
+    """
+    sitemap = MockedXMLSitemap(root_url=DEFAULT_HOST)
+    sitemap.add_url(
+        "/page_1.html", priority="1.0", changefreq="daily", lastmod="1997-07-16"
+    )
+
+    assert (
+        sitemap.recent_write_to_sitemap_buf
+        == f"<url><loc>{DEFAULT_HOST}/page_1.html</loc>"
+           f"<lastmod>1997-07-16</lastmod>"
+           f"<priority>1.0</priority>"
+           f"<changefreq>daily</changefreq></url>"
+    )
