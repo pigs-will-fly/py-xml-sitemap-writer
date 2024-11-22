@@ -96,7 +96,8 @@ class XMLSitemap:
         changefreq: Optional[str] = None,
     ):
         """
-        Adds the provided URL to the sitemap (with optional lastmod, priority and changefreq properties)
+        Adds the provided URL to the sitemap,
+        with optional lastmod, priority and changefreq properties
         https://www.sitemaps.org/protocol.html#xmlTagDefinitions
         """
         if self.sitemap_urls_counter == 0:
