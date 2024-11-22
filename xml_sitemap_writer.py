@@ -5,6 +5,8 @@ Provides XMLSitemap class used to generate large XML sitemap from iterators
 import gzip  # https://docs.python.org/3/library/gzip.html
 import logging
 
+from datetime import datetime
+
 from typing import List, Iterator, IO
 from xml.sax.saxutils import escape as escape_xml
 
@@ -192,12 +194,14 @@ class XMLSitemap:
         with open(f"{self.path}/sitemap.xml", mode="wt", encoding="utf-8") as index:
             self.logger.info(f"Will write sitemaps index XML to {index.name}")
 
+            generated_on = datetime.now().strftime("%Y-%m-%d")  # e.g. 2024-11-22
+
             index.writelines(
                 [
                     '<?xml version="1.0" encoding="UTF-8"?>\n',
                     '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n',
-                    f"\t<!-- Powered by {POWERED_BY_URL} -->\n",
-                    f"\t<!-- {len(self)} urls -->\n",
+                    f"\t<!-- Generated on {generated_on} by {POWERED_BY_URL} -->\n",
+                    f"\t<!-- {len(self)} urls in {len(self.sitemaps)} sub-sitemaps -->\n",
                 ]
             )
 
