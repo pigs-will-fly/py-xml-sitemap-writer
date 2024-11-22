@@ -28,12 +28,23 @@ CHANGEFREQ_VALUES = {
 }
 
 def is_valid_date(date_str: str) -> bool:
+    """
+    Checks if the provided string matches the W3C timestamp format
+    """
     return W3C_DATE_REGEX.match(date_str) or W3C_DATETIME_REGEX.match(date_str)
 
 def is_valid_changefreq(changefreq: str) -> bool:
+    """
+    Checks if the provided string is one of the valid values for the <changefreq> tag
+    https://www.sitemaps.org/protocol.html#changefreqdef
+    """
     return changefreq in CHANGEFREQ_VALUES
 
 def is_valid_priority(priority: str) -> bool:
+    """
+    Checks if the provided string is a valid numeric value for the <priority> tag
+    https://www.sitemaps.org/protocol.html#prioritydef
+    """
     try:
         value = float(priority)
         return 0.0 <= value <= 1.0
