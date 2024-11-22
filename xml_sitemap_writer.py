@@ -103,7 +103,9 @@ class XMLSitemap:
             self.logger.warning(f"Invalid <lastmod> format for URL <{url}>: {lastmod}")
             lastmod = None
         if changefreq and not is_valid_changefreq(changefreq):
-            self.logger.warning(f"Invalid <changefreq> value for URL <{url}>: {changefreq}")
+            self.logger.warning(
+                f"Invalid <changefreq> value for URL <{url}>: {changefreq}"
+            )
             changefreq = None
         if priority and not is_valid_priority(priority):
             self.logger.warning(f"Invalid <priority> value for URL <{url}>: {priority}")
