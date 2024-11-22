@@ -91,7 +91,9 @@ class XMLSitemap:
         self.sitemap_urls_counter += 1
 
         if self.sitemap_urls_counter > self.URLS_PER_FILE:
-            self.logger.info(f"URLs per sitemap counter reached the limit of {self.URLS_PER_FILE}")
+            self.logger.info(
+                f"URLs per sitemap counter reached the limit of {self.URLS_PER_FILE}"
+            )
             self._add_sitemap()
             self.sitemap_urls_counter = 1
 
