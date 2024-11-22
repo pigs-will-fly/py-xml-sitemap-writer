@@ -64,7 +64,19 @@ def test_add_url_with_props():
     assert (
         sitemap.recent_write_to_sitemap_buf
         == f"<url><loc>{DEFAULT_HOST}/page_1.html</loc>"
-           f"<lastmod>1997-07-16</lastmod>"
-           f"<priority>1.0</priority>"
-           f"<changefreq>daily</changefreq></url>"
+        f"<lastmod>1997-07-16</lastmod>"
+        f"<priority>1.0</priority>"
+        f"<changefreq>daily</changefreq></url>"
+    )
+
+    sitemap.add_url(
+        "/page_2.html",
+        priority="high",
+        changefreq="every two days",
+        lastmod="1997/07/16",
+    )
+
+    assert (
+        sitemap.recent_write_to_sitemap_buf
+        == f"<url><loc>{DEFAULT_HOST}/page_2.html</loc></url>"
     )
