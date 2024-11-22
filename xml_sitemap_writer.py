@@ -77,7 +77,7 @@ class XMLSitemap:
         self.add_section("pages")
 
 
-def add_url(
+    def add_url(
         self,
         url: str,
         lastmod: Optional[str] = None,
