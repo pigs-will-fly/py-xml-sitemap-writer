@@ -27,11 +27,17 @@ CHANGEFREQ_VALUES = {
     "never",
 }
 
+
 def is_valid_date(date_str: str) -> bool:
     """
     Checks if the provided string matches the W3C timestamp format
+    https://www.w3.org/TR/NOTE-datetime
     """
-    return W3C_DATE_REGEX.match(date_str) or W3C_DATETIME_REGEX.match(date_str)
+    return (
+        W3C_DATE_REGEX.match(date_str) is not None
+        or W3C_DATETIME_REGEX.match(date_str) is not None
+    )
+
 
 def is_valid_changefreq(changefreq: str) -> bool:
     """
@@ -39,6 +45,7 @@ def is_valid_changefreq(changefreq: str) -> bool:
     https://www.sitemaps.org/protocol.html#changefreqdef
     """
     return changefreq in CHANGEFREQ_VALUES
+
 
 def is_valid_priority(priority: str) -> bool:
     """
@@ -86,7 +93,6 @@ class XMLSitemap:
         self._sitemap_file = None
 
         self.add_section("pages")
-
 
     def add_url(
         self,
