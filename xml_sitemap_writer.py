@@ -194,13 +194,13 @@ class XMLSitemap:
         with open(f"{self.path}/sitemap.xml", mode="wt", encoding="utf-8") as index:
             self.logger.info(f"Will write sitemaps index XML to {index.name}")
 
-            generated_at = datetime.now().strftime("%Y-%m-%d")  # e.g. 2024-11-22
+            generated_on = datetime.now().strftime("%Y-%m-%d")  # e.g. 2024-11-22
 
             index.writelines(
                 [
                     '<?xml version="1.0" encoding="UTF-8"?>\n',
                     '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n',
-                    f"\t<!-- Generated at {generated_at} by {POWERED_BY_URL} -->\n",
+                    f"\t<!-- Generated on {generated_on} by {POWERED_BY_URL} -->\n",
                     f"\t<!-- {len(self)} urls in {len(self.sitemaps)} sub-sitemaps -->\n",
                 ]
             )
