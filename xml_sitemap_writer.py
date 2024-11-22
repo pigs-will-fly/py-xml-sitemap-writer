@@ -10,9 +10,19 @@ from xml.sax.saxutils import escape as escape_xml
 
 POWERED_BY_URL = "https://github.com/pigs-will-fly/py-xml-sitemap-writer"
 
-W3C_DATE_REGEX = re.compile(r'^\d{4}-\d{2}-\d{2}$')
-W3C_DATETIME_REGEX = re.compile(r'^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\+\d{2}:\d{2}|Z)?$')
-CHANGEFREQ_VALUES = {"always", "hourly", "daily", "weekly", "monthly", "yearly", "never"}
+W3C_DATE_REGEX = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+W3C_DATETIME_REGEX = re.compile(
+    r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\+\d{2}:\d{2}|Z)?$"
+)
+CHANGEFREQ_VALUES = {
+    "always",
+    "hourly",
+    "daily",
+    "weekly",
+    "monthly",
+    "yearly",
+    "never",
+}
 
 def is_valid_date(date_str: str) -> bool:
     return W3C_DATE_REGEX.match(date_str) or W3C_DATETIME_REGEX.match(date_str)
