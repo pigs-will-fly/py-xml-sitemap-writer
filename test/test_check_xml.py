@@ -62,7 +62,9 @@ def test_simple_single_sitemap_output():
                 in content
             ), "<sitemap> element is properly emitted"
 
-            assert "<!-- 5 urls -->" in content, "URLs counter is properly added"
+            assert (
+                "<!-- 5 urls in 1 sub-sitemaps -->" in content
+            ), "URLs counter is properly added"
 
 
 def test_encode_urls():

@@ -4,7 +4,7 @@ Package definition
 
 from setuptools import setup
 
-VERSION = "0.5.1"
+VERSION = "0.6.0"
 
 # @see https://packaging.python.org/tutorials/packaging-projects/#creating-setup-py
 with open("README.md", "r", encoding="utf-8") as fh:
@@ -37,10 +37,10 @@ setup(
     py_modules=["xml_sitemap_writer"],
     extras_require={
         "dev": [
-            "black==24.10.0",
+            "black==25.1.0",
             "coveralls==4.0.1",
-            "pylint==3.3.1",
-            "pytest==8.3.3",
+            "pylint==3.3.4",
+            "pytest==8.3.5",
             "pytest-cov==6.0.0",
         ]
     },
